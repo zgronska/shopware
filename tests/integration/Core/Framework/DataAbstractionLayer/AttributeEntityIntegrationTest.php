@@ -15,6 +15,7 @@ use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\AttributeEntityDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\AttributeMappingDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\AttributeTranslationDefinition;
+use Shopware\Core\Framework\DataAbstractionLayer\EntityCollection;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldType\DateInterval;
 use Shopware\Core\Framework\DataAbstractionLayer\Pricing\CashRoundingConfig;
@@ -28,6 +29,7 @@ use Shopware\Core\Framework\Test\TestCaseBase\KernelTestBehaviour;
 use Shopware\Core\Test\Stub\Framework\IdsCollection;
 use Shopware\Core\Test\TestDefaults;
 use Shopware\Tests\Integration\Core\Framework\DataAbstractionLayer\fixture\AttributeEntity;
+use Shopware\Tests\Integration\Core\Framework\DataAbstractionLayer\fixture\AttributeEntityCollection;
 
 /**
  * @internal
@@ -70,10 +72,12 @@ class AttributeEntityIntegrationTest extends TestCase
         static::assertTrue(static::getContainer()->has('attribute_entity_translation.repository'));
         static::assertTrue(static::getContainer()->has('attribute_entity_translation.definition'));
 
-        static::assertInstanceOf(AttributeEntityDefinition::class, static::getContainer()->get('attribute_entity.definition'));
-        static::assertInstanceOf(AttributeEntityDefinition::class, static::getContainer()->get('attribute_entity_agg.definition'));
-        static::assertInstanceOf(AttributeMappingDefinition::class, static::getContainer()->get('attribute_entity_currency.definition'));
-        static::assertInstanceOf(AttributeTranslationDefinition::class, static::getContainer()->get('attribute_entity_translation.definition'));
+        static::assertInstanceOf(AttributeEntityDefinition::class, $this->getContainer()->get('attribute_entity.definition'));
+        static::assertSame(AttributeEntityCollection::class, $this->getContainer()->get('attribute_entity.definition')->getCollectionClass());
+        static::assertInstanceOf(AttributeEntityDefinition::class, $this->getContainer()->get('attribute_entity_agg.definition'));
+        static::assertSame(EntityCollection::class, $this->getContainer()->get('attribute_entity_agg.definition')->getCollectionClass());
+        static::assertInstanceOf(AttributeMappingDefinition::class, $this->getContainer()->get('attribute_entity_currency.definition'));
+        static::assertInstanceOf(AttributeTranslationDefinition::class, $this->getContainer()->get('attribute_entity_translation.definition'));
 
         static::assertInstanceOf(EntityRepository::class, static::getContainer()->get('attribute_entity.repository'));
         static::assertInstanceOf(EntityRepository::class, static::getContainer()->get('attribute_entity_currency.repository'));
