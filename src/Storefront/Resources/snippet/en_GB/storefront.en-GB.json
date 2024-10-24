@@ -763,6 +763,7 @@
         }
       },
       "quantitySelect": {
+        "legend": "Product Quantity: Enter the desired amount or use the buttons to increase or decrease the quantity.",
         "label": "Quantity",
         "increase": "Increase quantity",
         "decrease": "Decrease quantity"

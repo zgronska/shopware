@@ -763,6 +763,7 @@
         }
       },
       "quantitySelect": {
+        "legend": "Produkt Anzahl: Gib den gewünschten Wert ein oder benutze die Schaltflächen um die Anzahl zu erhöhen oder zu reduzieren.",
         "label": "Anzahl",
         "increase": "Anzahl erhöhen",
         "decrease": "Anzahl verringern"
