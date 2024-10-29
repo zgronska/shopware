@@ -1,6 +1,6 @@
 ---
 title: Add configurable installer timeout
-issue: NEXT-XXXXX
+issue: NEXT-39312
 author: Marc Christenfeldt
 author_email: marc.christenfeldt@gmx.de
 author_github: marcbln
@@ -29,6 +29,12 @@ export SHOPWARE_INSTALLER_TIMEOUT=1800
 
 # Set timeout to 1 hour
 export SHOPWARE_INSTALLER_TIMEOUT=3600
+```
+
+Or in the projects' `.env.installer` file:
+
+```bash
+SHOPWARE_INSTALLER_TIMEOUT=1800
 ```
 
 ### Validation

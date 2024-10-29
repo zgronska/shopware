@@ -60,8 +60,8 @@ class StreamedCommandResponseGeneratorTest extends TestCase
         $response->sendContent();
         ob_end_clean();
 
-        self::assertNotNull($theFinishedProcess);
-        static::assertSame((float)$customTimeout, $theFinishedProcess->getTimeout());
+        static::assertNotNull($theFinishedProcess);
+        static::assertSame((float) $customTimeout, $theFinishedProcess->getTimeout());
 
         // Cleanup
         putenv('SHOPWARE_INSTALLER_TIMEOUT');
@@ -83,7 +83,7 @@ class StreamedCommandResponseGeneratorTest extends TestCase
         $response->sendContent();
         ob_end_clean();
 
-        self::assertNotNull($theFinishedProcess);
+        static::assertNotNull($theFinishedProcess);
         static::assertSame(StreamedCommandResponseGenerator::DEFAULT_TIMEOUT, $theFinishedProcess->getTimeout());
     }
 
@@ -98,12 +98,11 @@ class StreamedCommandResponseGeneratorTest extends TestCase
             $theFinishedProcess = $process;
         });
 
-
         ob_start();
         $response->sendContent();
         ob_end_clean();
 
-        self::assertNotNull($theFinishedProcess);
+        static::assertNotNull($theFinishedProcess);
         static::assertSame(StreamedCommandResponseGenerator::DEFAULT_TIMEOUT, $theFinishedProcess->getTimeout());
 
         // Cleanup
@@ -125,7 +124,7 @@ class StreamedCommandResponseGeneratorTest extends TestCase
         $response->sendContent();
         ob_end_clean();
 
-        self::assertNotNull($theFinishedProcess);
+        static::assertNotNull($theFinishedProcess);
         static::assertSame(StreamedCommandResponseGenerator::DEFAULT_TIMEOUT, $theFinishedProcess->getTimeout());
 
         // Cleanup
