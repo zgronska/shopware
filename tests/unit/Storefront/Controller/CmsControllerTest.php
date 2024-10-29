@@ -8,8 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Shopware\Core\Content\Category\CategoryEntity;
 use Shopware\Core\Content\Category\SalesChannel\CategoryRoute;
 use Shopware\Core\Content\Category\SalesChannel\CategoryRouteResponse;
+use Shopware\Core\Content\Cms\CmsException;
 use Shopware\Core\Content\Cms\CmsPageEntity;
-use Shopware\Core\Content\Cms\Exception\PageNotFoundException;
 use Shopware\Core\Content\Cms\SalesChannel\CmsRoute;
 use Shopware\Core\Content\Cms\SalesChannel\CmsRouteResponse;
 use Shopware\Core\Content\Product\SalesChannel\Detail\ProductDetailRoute;
@@ -112,11 +112,11 @@ class CmsControllerTest extends TestCase
         $categoryRouteResponse = new CategoryRouteResponse($categoryEntity);
         $this->categoryRouteMock->method('load')->willReturn($categoryRouteResponse);
 
-        $ids = new IdsCollection();
+        $navigationId = (new IdsCollection())->get('category');
+        $this->expectException(CmsException::class);
+        $this->expectExceptionMessage(\sprintf('Page with ID "navigationId: %s" was not found.', $navigationId));
 
-        static::expectException(PageNotFoundException::class);
-
-        $this->controller->category($ids->get('category'), new Request(), $this->createMock(SalesChannelContext::class));
+        $this->controller->category($navigationId, new Request(), $this->createMock(SalesChannelContext::class));
     }
 
     public function testFilterReturn(): void

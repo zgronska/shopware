@@ -65,8 +65,6 @@ class ProductControllerTest extends TestCase
 
     private MockObject&ProductReviewLoader $productReviewLoaderMock;
 
-    private MockObject&EventDispatcher $eventDispatcherMock;
-
     private ProductControllerStub $controller;
 
     protected function setUp(): void
@@ -78,7 +76,6 @@ class ProductControllerTest extends TestCase
         $this->productReviewSaveRouteMock = $this->createMock(AbstractProductReviewSaveRoute::class);
         $this->systemConfigServiceMock = $this->createMock(SystemConfigService::class);
         $this->productReviewLoaderMock = $this->createMock(ProductReviewLoader::class);
-        $this->eventDispatcherMock = $this->createMock(EventDispatcher::class);
 
         $this->controller = new ProductControllerStub(
             $this->productPageLoaderMock,
@@ -88,7 +85,7 @@ class ProductControllerTest extends TestCase
             $this->seoUrlPlaceholderHandlerMock,
             $this->productReviewLoaderMock,
             $this->systemConfigServiceMock,
-            $this->eventDispatcherMock,
+            $this->createMock(EventDispatcher::class),
         );
     }
 

@@ -3,8 +3,9 @@
 namespace Shopware\Storefront\Controller;
 
 use Shopware\Core\Content\Category\SalesChannel\AbstractCategoryRoute;
-use Shopware\Core\Content\Cms\Exception\PageNotFoundException;
+use Shopware\Core\Content\Cms\CmsException;
 use Shopware\Core\Content\Cms\SalesChannel\AbstractCmsRoute;
+use Shopware\Core\Content\Product\Aggregate\ProductReview\ProductReviewCollection;
 use Shopware\Core\Content\Product\SalesChannel\Detail\AbstractProductDetailRoute;
 use Shopware\Core\Content\Product\SalesChannel\FindVariant\AbstractFindProductVariantRoute;
 use Shopware\Core\Content\Product\SalesChannel\Listing\AbstractProductListingRoute;
@@ -66,7 +67,12 @@ class CmsController extends StorefrontController
     /**
      * Navigation id is required to load the slot config for the navigation
      */
-    #[Route(path: '/widgets/cms/navigation/{navigationId}', name: 'frontend.cms.navigation.page', defaults: ['navigationId' => null, 'XmlHttpRequest' => true, '_httpCache' => true], methods: ['GET', 'POST'])]
+    #[Route(
+        path: '/widgets/cms/navigation/{navigationId}',
+        name: 'frontend.cms.navigation.page',
+        defaults: ['navigationId' => null, 'XmlHttpRequest' => true, '_httpCache' => true],
+        methods: ['GET', 'POST']
+    )]
     public function category(?string $navigationId, Request $request, SalesChannelContext $salesChannelContext): Response
     {
         if (!$navigationId) {
@@ -77,7 +83,7 @@ class CmsController extends StorefrontController
 
         $page = $category->getCmsPage();
         if (!$page) {
-            throw new PageNotFoundException('');
+            throw CmsException::pageNotFound('navigationId: ' . $navigationId);
         }
 
         $this->hook(new CmsPageLoadedHook($page, $salesChannelContext));
@@ -91,7 +97,12 @@ class CmsController extends StorefrontController
     /**
      * Route to load the listing filters
      */
-    #[Route(path: '/widgets/cms/navigation/{navigationId}/filter', name: 'frontend.cms.navigation.filter', defaults: ['XmlHttpRequest' => true, '_routeScope' => ['storefront'], '_httpCache' => true], methods: ['GET', 'POST'])]
+    #[Route(
+        path: '/widgets/cms/navigation/{navigationId}/filter',
+        name: 'frontend.cms.navigation.filter',
+        defaults: ['XmlHttpRequest' => true, '_routeScope' => ['storefront'], '_httpCache' => true],
+        methods: ['GET', 'POST']
+    )]
     public function filter(string $navigationId, Request $request, SalesChannelContext $context): Response
     {
         // Allows to fetch only aggregations over the gateway.
@@ -120,7 +131,12 @@ class CmsController extends StorefrontController
      * Route to load the cms element buy box product config which assigned to the provided product id.
      * Product id is required to load the slot config for the buy box
      */
-    #[Route(path: '/widgets/cms/buybox/{productId}/switch', name: 'frontend.cms.buybox.switch', defaults: ['productId' => null, 'XmlHttpRequest' => true, '_routeScope' => ['storefront'], '_httpCache' => true], methods: ['GET'])]
+    #[Route(
+        path: '/widgets/cms/buybox/{productId}/switch',
+        name: 'frontend.cms.buybox.switch',
+        defaults: ['productId' => null, 'XmlHttpRequest' => true, '_routeScope' => ['storefront'], '_httpCache' => true],
+        methods: ['GET']
+    )]
     public function switchBuyBoxVariant(string $productId, Request $request, SalesChannelContext $context): Response
     {
         /** @var string $elementId */
@@ -150,6 +166,7 @@ class CmsController extends StorefrontController
         $reviews = $this->productReviewLoader->load($request, $context, $product->getId(), $product->getParentId());
 
         if (!Feature::isActive('v6.7.0.0')) {
+            /** @var StorefrontSearchResult<ProductReviewCollection> $storefrontReviews */
             $storefrontReviews = new StorefrontSearchResult(
                 $reviews->getEntity(),
                 $reviews->getTotal(),

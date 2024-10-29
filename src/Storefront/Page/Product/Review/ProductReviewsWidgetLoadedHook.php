@@ -15,7 +15,7 @@ use Shopware\Storefront\Page\PageLoadedHook;
  *
  * @hook-use-case data_loading
  *
- * @deprecated tag:v6.7.0 - Use \Shopware\Core\Content\Product\SalesChannel\Review\ProductReviewsWidgetLoadedHook instead
+ * @deprecated tag:v6.7.0 - Will be removed. Use \Shopware\Core\Content\Product\SalesChannel\Review\ProductReviewsWidgetLoadedHook instead
  * @since 6.4.8.0
  *
  * @final
@@ -58,10 +58,11 @@ class ProductReviewsWidgetLoadedHook extends PageLoadedHook implements Deprecate
         return $this->reviews;
     }
 
+    /**
+     * @phpstan-ignore shopware.deprecatedClass (this method is called by the core, so it should not trigger a deprecation)
+     */
     public static function getDeprecationNotice(): string
     {
-        Feature::triggerDeprecationOrThrow('v6.7.0.0', Feature::deprecatedClassMessage(self::class, 'v6.7.0.0', CoreProductReviewsWidgetLoadedHook::class));
-
         return Feature::deprecatedClassMessage(self::class, 'v6.7.0.0', CoreProductReviewsWidgetLoadedHook::class);
     }
 }

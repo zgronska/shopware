@@ -2,6 +2,7 @@
 
 namespace Shopware\Storefront\Page\Product\Review;
 
+use Shopware\Core\Content\Product\Aggregate\ProductReview\ProductReviewCollection;
 use Shopware\Core\Content\Product\SalesChannel\Review\AbstractProductReviewLoader;
 use Shopware\Core\Content\Product\SalesChannel\Review\ProductReviewLoader as CoreProductReviewLoader;
 use Shopware\Core\Framework\Feature;
@@ -13,7 +14,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @deprecated tag:v6.7.0 - Use \Shopware\Core\Content\Product\SalesChannel\Review\ProductReviewLoader instead
+ * @deprecated tag:v6.7.0 - Will be removed. Use \Shopware\Core\Content\Product\SalesChannel\Review\ProductReviewLoader instead
  */
 #[Package('storefront')]
 class ProductReviewLoader
@@ -22,7 +23,7 @@ class ProductReviewLoader
      * @internal
      */
     public function __construct(
-        private readonly AbstractProductReviewLoader $abstractProductReviewLoader,
+        private readonly AbstractProductReviewLoader $productReviewLoader,
         private readonly EventDispatcherInterface $eventDispatcher
     ) {
     }
@@ -39,7 +40,8 @@ class ProductReviewLoader
             throw RoutingException::missingRequestParameter('productId');
         }
 
-        $reviews = $this->abstractProductReviewLoader->load($request, $context, $productId, $request->get('parentId'));
+        $reviews = $this->productReviewLoader->load($request, $context, $productId, $request->get('parentId'));
+        /** @var StorefrontSearchResult<ProductReviewCollection> $storefrontReviews */
         $storefrontReviews = new StorefrontSearchResult(
             $reviews->getEntity(),
             $reviews->getTotal(),
@@ -55,7 +57,7 @@ class ProductReviewLoader
         $reviewResult->setMatrix($reviews->getMatrix());
         $reviewResult->setCustomerReview($reviews->getCustomerReview());
         $reviewResult->setTotalReviews($reviews->getTotal());
-        $reviewResult->setTotalNativeReviews($reviews->getTotalNativeReviews());
+        $reviewResult->setTotalReviewsInCurrentLanguage($reviews->getTotalReviewsInCurrentLanguage());
         $reviewResult->setProductId($reviews->getProductId());
         $reviewResult->setParentId($reviews->getParentId());
 

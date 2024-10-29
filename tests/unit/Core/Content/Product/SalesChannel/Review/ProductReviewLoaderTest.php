@@ -81,7 +81,7 @@ class ProductReviewLoaderTest extends TestCase
         $result = $productReviewLoader->load($request, $salesChannelContext, $productId);
 
         static::assertInstanceOf(ProductReviewEntity::class, $result->first());
-        static::assertEquals($result->first()->getId(), $reviewId);
+        static::assertSame($result->first()->getId(), $reviewId);
         static::assertCount(1, $result);
         static::assertNull($result->getCustomerReview());
     }
@@ -117,8 +117,8 @@ class ProductReviewLoaderTest extends TestCase
 
         $firstResult = $result->first();
         static::assertInstanceOf(ProductReviewEntity::class, $firstResult);
-        static::assertEquals($firstResult->getId(), $reviewId);
-        static::assertEquals($result->getCriteria()->getOffset(), 10);
+        static::assertSame($firstResult->getId(), $reviewId);
+        static::assertSame($result->getCriteria()->getOffset(), 10);
         static::assertCount(1, $result);
         static::assertNull($result->getCustomerReview());
     }
@@ -153,8 +153,8 @@ class ProductReviewLoaderTest extends TestCase
         $result = $productReviewLoader->load($request, $salesChannelContext, $productId);
 
         static::assertInstanceOf(ProductReviewEntity::class, $result->first());
-        static::assertEquals($result->first()->getId(), $reviewId);
-        static::assertEquals($result->getCriteria()->getOffset(), 0);
+        static::assertSame($result->first()->getId(), $reviewId);
+        static::assertSame($result->getCriteria()->getOffset(), 0);
         static::assertCount(1, $result);
         static::assertNull($result->getCustomerReview());
     }
@@ -186,7 +186,7 @@ class ProductReviewLoaderTest extends TestCase
         $result = $productReviewLoader->load($request, $salesChannelContext, $productId);
 
         static::assertInstanceOf(ProductReviewEntity::class, $result->first());
-        static::assertEquals($reviewId, $result->first()->getId());
+        static::assertSame($reviewId, $result->first()->getId());
         static::assertCount(1, $result);
         static::assertEquals([new FieldSorting('points', 'DESC')], $result->getCriteria()->getSorting());
         static::assertNotNull($result->getCustomerReview());
@@ -219,7 +219,7 @@ class ProductReviewLoaderTest extends TestCase
         $result = $productReviewLoader->load($request, $salesChannelContext, $productId);
 
         static::assertInstanceOf(ProductReviewEntity::class, $result->first());
-        static::assertEquals($result->first()->getId(), $reviewId);
+        static::assertSame($result->first()->getId(), $reviewId);
         static::assertCount(1, $result);
     }
 

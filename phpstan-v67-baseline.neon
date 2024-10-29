@@ -26,8 +26,6 @@ parameters:
                 - src/Core/Checkout/Payment/Cart/PaymentHandler/PrePayment.php
                 - src/Core/Maintenance/System/Exception/DatabaseSetupException.php
                 - src/Storefront/Page/Account/Order/AccountOrderPage.php
-                - src/Storefront/Page/Product/Review/ProductReviewsLoadedEvent.php
-                - src/Storefront/Page/Product/Review/ReviewLoaderResult.php
 
         - # Added optional request parameter @deprecated tag:v6.7.0 - remove this exclusion
             message: '#Method .* invoked with 4 parameters, 3 required#'

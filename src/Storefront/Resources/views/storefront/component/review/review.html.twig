@@ -16,8 +16,12 @@
             {% set productAvgRating = reviews.matrix.averageRating|round(2, 'common') %}
 		{% endif %}
 
-		{% set nativeReviewsCount = reviews.totalNativeReviews ?: reviews.totalReviews %}
-		{% set foreignReviewsCount = reviews.totalReviews - nativeReviewsCount %}
+		{% set totalReviewsInCurrentLanguage = reviews.totalReviewsInCurrentLanguage ?: productReviewCount %}
+		{% set numberOfReviewsNotInCurrentLanguage = productReviewCount - totalReviewsInCurrentLanguage %}
+        {# @deprecated tag:v6.7.0 - Unused variable foreignReviewsCount will be removed. Use numberOfReviewsNotInCurrentLanguage instead #}
+        {% if not feature('v6.7.0.0') %}
+		    {% set foreignReviewsCount = numberOfReviewsNotInCurrentLanguage %}
+        {% endif %}
 
 		<div class="product-detail-review tab-pane-container">
 			{% block component_review_tab_pane %}
@@ -110,7 +114,7 @@
                                                                                 value="filter-language"
                                                                                 name="language"
                                                                                 {% if app.request.get('language') %}checked="checked"{% endif %}
-                                                                                {% if foreignReviewsCount == 0 %}disabled="disabled"{% endif %}>
+                                                                                {% if numberOfReviewsNotInCurrentLanguage is same as 0 and not app.request.get('language') %}disabled="disabled"{% endif %}>
                                                                             <label class="custom-control-label form-label"
                                                                                 for="showForeignReviews">
                                                                                 <small>{{ 'detail.reviewLanguageFilterLabel'|trans|sw_sanitize }}</small>

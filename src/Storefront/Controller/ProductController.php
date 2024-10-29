@@ -2,6 +2,7 @@
 
 namespace Shopware\Storefront\Controller;
 
+use Shopware\Core\Content\Product\Aggregate\ProductReview\ProductReviewCollection;
 use Shopware\Core\Content\Product\Exception\ProductNotFoundException;
 use Shopware\Core\Content\Product\Exception\ReviewNotActiveExeption;
 use Shopware\Core\Content\Product\Exception\VariantNotFoundException;
@@ -163,6 +164,7 @@ class ProductController extends StorefrontController
         $this->hook(new ProductReviewsWidgetLoadedHook($reviews, $context));
 
         if (!Feature::isActive('v6.7.0.0')) {
+            /** @var StorefrontSearchResult<ProductReviewCollection> $storefrontReviews */
             $storefrontReviews = new StorefrontSearchResult(
                 $reviews->getEntity(),
                 $reviews->getTotal(),
@@ -178,7 +180,7 @@ class ProductController extends StorefrontController
             $reviewResult->setMatrix($reviews->getMatrix());
             $reviewResult->setCustomerReview($reviews->getCustomerReview());
             $reviewResult->setTotalReviews($reviews->getTotal());
-            $reviewResult->setTotalNativeReviews($reviews->getTotalNativeReviews());
+            $reviewResult->setTotalReviewsInCurrentLanguage($reviews->getTotalReviewsInCurrentLanguage());
             $reviewResult->setProductId($reviews->getProductId());
             $reviewResult->setParentId($reviews->getParentId());
 

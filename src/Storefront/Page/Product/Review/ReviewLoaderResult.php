@@ -11,7 +11,7 @@ use Shopware\Core\Framework\Log\Package;
 use Shopware\Storefront\Framework\Page\StorefrontSearchResult;
 
 /**
- * @deprecated tag:v6.7.0 - Use \Shopware\Core\Content\Product\SalesChannel\Review\ProductReviewResult instead
+ * @deprecated tag:v6.7.0 - Will be removed. Use \Shopware\Core\Content\Product\SalesChannel\Review\ProductReviewResult instead
  *
  * @template-extends StorefrontSearchResult<ProductReviewCollection>
  */
@@ -45,10 +45,7 @@ class ReviewLoaderResult extends StorefrontSearchResult
      */
     protected $totalReviews;
 
-    /**
-     * @var int
-     */
-    protected $totalNativeReviews;
+    protected int $totalReviewsInCurrentLanguage;
 
     public function getProductId(): string
     {
@@ -116,18 +113,18 @@ class ReviewLoaderResult extends StorefrontSearchResult
         $this->totalReviews = $totalReviews;
     }
 
-    public function getTotalNativeReviews(): int
+    public function getTotalReviewsInCurrentLanguage(): int
     {
         Feature::triggerDeprecationOrThrow('v6.7.0.0', Feature::deprecatedClassMessage(self::class, 'v6.7.0.0', ProductReviewResult::class));
 
-        return $this->totalNativeReviews;
+        return $this->totalReviewsInCurrentLanguage;
     }
 
-    public function setTotalNativeReviews(int $totalNativeReviews): void
+    public function setTotalReviewsInCurrentLanguage(int $totalReviewsInCurrentLanguage): void
     {
         Feature::triggerDeprecationOrThrow('v6.7.0.0', Feature::deprecatedClassMessage(self::class, 'v6.7.0.0', ProductReviewResult::class));
 
-        $this->totalNativeReviews = $totalNativeReviews;
+        $this->totalReviewsInCurrentLanguage = $totalReviewsInCurrentLanguage;
     }
 
     public function getParentId(): ?string

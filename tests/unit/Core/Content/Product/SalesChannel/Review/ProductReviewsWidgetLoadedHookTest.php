@@ -18,10 +18,10 @@ use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\Feature;
 use Shopware\Core\Framework\Log\Package;
-use Shopware\Core\Framework\Test\IdsCollection;
 use Shopware\Core\Framework\Uuid\Uuid;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
 use Shopware\Core\System\SystemConfig\SystemConfigService;
+use Shopware\Core\Test\Stub\Framework\IdsCollection;
 use Shopware\Storefront\Page\Product\ProductPageLoader;
 use Shopware\Storefront\Page\Product\QuickView\MinimalQuickViewPageLoader;
 use Shopware\Tests\Unit\Storefront\Controller\Stub\ProductControllerStub;
@@ -35,44 +35,26 @@ use Symfony\Component\HttpFoundation\Request;
 #[CoversClass(ProductReviewsWidgetLoadedHook::class)]
 class ProductReviewsWidgetLoadedHookTest extends TestCase
 {
-    private MockObject&ProductPageLoader $productPageLoaderMock;
-
-    private MockObject&FindProductVariantRoute $findVariantRouteMock;
-
-    private MockObject&SeoUrlPlaceholderHandlerInterface $seoUrlPlaceholderHandlerMock;
-
-    private MockObject&MinimalQuickViewPageLoader $minimalQuickViewPageLoaderMock;
-
-    private MockObject&AbstractProductReviewSaveRoute $productReviewSaveRouteMock;
-
     private MockObject&SystemConfigService $systemConfigServiceMock;
 
     private MockObject&ProductReviewLoader $productReviewLoaderMock;
-
-    private MockObject&EventDispatcher $eventDispatcherMock;
 
     private ProductControllerStub $controller;
 
     protected function setUp(): void
     {
-        $this->productPageLoaderMock = $this->createMock(ProductPageLoader::class);
-        $this->findVariantRouteMock = $this->createMock(FindProductVariantRoute::class);
-        $this->seoUrlPlaceholderHandlerMock = $this->createMock(SeoUrlPlaceholderHandlerInterface::class);
-        $this->minimalQuickViewPageLoaderMock = $this->createMock(MinimalQuickViewPageLoader::class);
-        $this->productReviewSaveRouteMock = $this->createMock(AbstractProductReviewSaveRoute::class);
         $this->systemConfigServiceMock = $this->createMock(SystemConfigService::class);
         $this->productReviewLoaderMock = $this->createMock(ProductReviewLoader::class);
-        $this->eventDispatcherMock = $this->createMock(EventDispatcher::class);
 
         $this->controller = new ProductControllerStub(
-            $this->productPageLoaderMock,
-            $this->findVariantRouteMock,
-            $this->minimalQuickViewPageLoaderMock,
-            $this->productReviewSaveRouteMock,
-            $this->seoUrlPlaceholderHandlerMock,
+            $this->createMock(ProductPageLoader::class),
+            $this->createMock(FindProductVariantRoute::class),
+            $this->createMock(MinimalQuickViewPageLoader::class),
+            $this->createMock(AbstractProductReviewSaveRoute::class),
+            $this->createMock(SeoUrlPlaceholderHandlerInterface::class),
             $this->productReviewLoaderMock,
             $this->systemConfigServiceMock,
-            $this->eventDispatcherMock,
+            $this->createMock(EventDispatcher::class),
         );
     }
 
@@ -122,7 +104,6 @@ class ProductReviewsWidgetLoadedHookTest extends TestCase
 
         static::assertInstanceOf(ProductReviewsWidgetLoadedHook::class, $this->controller->calledHook);
 
-        /** @var ProductReviewsWidgetLoadedHook $productReviewsWidgetLoadedHook */
         $productReviewsWidgetLoadedHook = $this->controller->calledHook;
 
         static::assertEquals($reviewResult, $productReviewsWidgetLoadedHook->getReviews());

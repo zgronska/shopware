@@ -14,7 +14,7 @@ use Shopware\Storefront\Framework\Page\StorefrontSearchResult;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @deprecated tag:v6.7.0 - Use \Shopware\Core\Content\Product\SalesChannel\Review\Event\ProductReviewsLoadedEvent instead
+ * @deprecated tag:v6.7.0 - Will be removed. Use \Shopware\Core\Content\Product\SalesChannel\Review\Event\ProductReviewsLoadedEvent instead
  */
 #[Package('storefront')]
 class ProductReviewsLoadedEvent extends NestedEvent implements ShopwareSalesChannelEvent
