@@ -12,7 +12,7 @@ discussion: https://forum.shopware.com/t/shopware-update-bricht-wegen-zu-langer-
 * Added new environment variable `SHOPWARE_INSTALLER_TIMEOUT` to configure the command timeout in the web installer
 * Added constant `DEFAULT_TIMEOUT` in `StreamedCommandResponseGenerator` to define the default timeout value of 900 seconds
 * Changed timeout handling in `StreamedCommandResponseGenerator` to support configurable timeout values from environment
-
+___
 # Upgrade Information
 
 ## Environment Configuration
