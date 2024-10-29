@@ -27,21 +27,30 @@ export default class QuantitySelectorPlugin extends Plugin {
         this._btnMinus = DomAccess.querySelector(this.el, '.js-btn-minus');
 
         if (this.options.ariaLiveUpdates) {
-            this.ariaLiveContainer = this.el.nextElementSibling;
-
-            if (this.ariaLiveContainer && this.ariaLiveContainer.hasAttribute('aria-live')) {
-                this.ariaLiveText = this.ariaLiveContainer.dataset.ariaLiveText;
-                this.ariaLiveProductName = this.ariaLiveContainer.dataset.ariaLiveProductName;
-
-                if (this.options.ariaLiveUpdateMode === 'onload') {
-                    // Delay the aria live update so the screen reader has time to read out other updates first.
-                    // Sometimes the update isn't read out because of other information.
-                    window.setTimeout(this._updateAriaLive.bind(this), 1000);
-                }
-            }
+            this._initAriaLiveUpdates();
         }
 
         this._registerEvents();
+    }
+
+    /**
+     * @private
+     */
+    _initAriaLiveUpdates() {
+        this.ariaLiveContainer = this.el.nextElementSibling;
+
+        if (!this.ariaLiveContainer || !this.ariaLiveContainer.hasAttribute('aria-live')) {
+            return;
+        }
+
+        this.ariaLiveText = this.ariaLiveContainer.dataset.ariaLiveText;
+        this.ariaLiveProductName = this.ariaLiveContainer.dataset.ariaLiveProductName;
+
+        if (this.options.ariaLiveUpdateMode === 'onload') {
+            // Delay the aria live update so the screen reader has time to read out other updates first.
+            // Sometimes the update isn't read out because of other information.
+            window.setTimeout(this._updateAriaLive.bind(this), 1000);
+        }
     }
 
     /**
