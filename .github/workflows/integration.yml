@@ -272,14 +272,13 @@ jobs:
           shopware-version: ${{ github.ref }}
           shopware-repository: ${{ github.repository }}
           install-admin: true
-          install-storefront: true
           env: dev
           path: new-shopware
 
       - name: Build new shopware
         working-directory: new-shopware
         run: |
-          composer run build:js:admin
+          composer run npm:storefront ci
           composer run npm:storefront run production
           (cd src/Storefront/Resources/app/storefront && node copy-to-vendor.js)
 
