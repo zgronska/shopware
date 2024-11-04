@@ -36,7 +36,7 @@ class CustomerRequestedGroupRuleTest extends TestCase
 
     public function testName(): void
     {
-        static::assertSame('customerRequestedCustomerGroup', $this->rule->getName());
+        static::assertSame('customerRequestedGroup', $this->rule->getName());
     }
 
     public function testGetConstraints(): void
@@ -84,8 +84,6 @@ class CustomerRequestedGroupRuleTest extends TestCase
 
     /**
      * @param array<string> $customerGroupIds
-     *
-     * @throws \PHPUnit\Framework\MockObject\Exception
      */
     #[DataProvider('getMatchValues')]
     public function testCustomerRequestedGroupRuleMatching(bool $expected, bool $loggedIn, ?string $requestedGroupId, array $customerGroupIds, string $operator): void
@@ -120,24 +118,98 @@ class CustomerRequestedGroupRuleTest extends TestCase
     }
 
     /**
-     * @return \Traversable<string, array<bool|string|array<string>|null>>
+     * @return \Traversable<string, array{expected: bool, loggedIn: bool, requestedGroupId: string|null, customerGroupIds: array<string>, operator: string}>
      */
     public static function getMatchValues(): \Traversable
     {
         $id = Uuid::randomHex();
 
-        yield 'operator_one_of / no match' => [false, true, $id, [Uuid::randomHex()], Rule::OPERATOR_EQ];
-        yield 'operator_one_of / one match' => [true, true, $id, [$id, Uuid::randomHex()], Rule::OPERATOR_EQ];
-        yield 'operator_one_of / empty' => [false, true, null, [$id, Uuid::randomHex()], Rule::OPERATOR_EQ];
-        yield 'operator_one_of / not logged in' => [false, false, null, [$id], Rule::OPERATOR_EQ];
+        yield 'operator_one_of / no match' => [
+            'expected' => false,
+            'loggedIn' => true,
+            'requestedGroupId' => $id,
+            'customerGroupIds' => [Uuid::randomHex()],
+            'operator' => Rule::OPERATOR_EQ,
+        ];
 
-        yield 'operator_none_of / no match' => [true, true, $id, [Uuid::randomHex()], Rule::OPERATOR_NEQ];
-        yield 'operator_none_of / one match' => [false, true, $id, [$id, Uuid::randomHex()], Rule::OPERATOR_NEQ];
-        yield 'operator_none_of / empty' => [true, true, null, [$id, Uuid::randomHex()], Rule::OPERATOR_NEQ];
-        yield 'operator_none_of / not logged in' => [true, false, null, [$id], Rule::OPERATOR_NEQ];
+        yield 'operator_one_of / one match' => [
+            'expected' => true,
+            'loggedIn' => true,
+            'requestedGroupId' => $id,
+            'customerGroupIds' => [$id, Uuid::randomHex()],
+            'operator' => Rule::OPERATOR_EQ,
+        ];
 
-        yield 'operator_empty / empty' => [true, true, null, [], Rule::OPERATOR_EMPTY];
-        yield 'operator_empty / not empty' => [false, true, $id, [], Rule::OPERATOR_EMPTY];
-        yield 'operator_empty / not logged in' => [true, false, null, [], Rule::OPERATOR_EMPTY];
+        yield 'operator_one_of / empty' => [
+            'expected' => false,
+            'loggedIn' => true,
+            'requestedGroupId' => null,
+            'customerGroupIds' => [$id, Uuid::randomHex()],
+            'operator' => Rule::OPERATOR_EQ,
+        ];
+
+        yield 'operator_one_of / not logged in' => [
+            'expected' => false,
+            'loggedIn' => false,
+            'requestedGroupId' => null,
+            'customerGroupIds' => [$id],
+            'operator' => Rule::OPERATOR_EQ,
+        ];
+
+        yield 'operator_none_of / no match' => [
+            'expected' => true,
+            'loggedIn' => true,
+            'requestedGroupId' => $id,
+            'customerGroupIds' => [Uuid::randomHex()],
+            'operator' => Rule::OPERATOR_NEQ,
+        ];
+
+        yield 'operator_none_of / one match' => [
+            'expected' => false,
+            'loggedIn' => true,
+            'requestedGroupId' => $id,
+            'customerGroupIds' => [$id, Uuid::randomHex()],
+            'operator' => Rule::OPERATOR_NEQ,
+        ];
+
+        yield 'operator_none_of / empty' => [
+            'expected' => true,
+            'loggedIn' => true,
+            'requestedGroupId' => null,
+            'customerGroupIds' => [$id, Uuid::randomHex()],
+            'operator' => Rule::OPERATOR_NEQ,
+        ];
+
+        yield 'operator_none_of / not logged in' => [
+            'expected' => true,
+            'loggedIn' => false,
+            'requestedGroupId' => null,
+            'customerGroupIds' => [$id],
+            'operator' => Rule::OPERATOR_NEQ,
+        ];
+
+        yield 'operator_empty / empty' => [
+            'expected' => true,
+            'loggedIn' => true,
+            'requestedGroupId' => null,
+            'customerGroupIds' => [],
+            'operator' => Rule::OPERATOR_EMPTY,
+        ];
+
+        yield 'operator_empty / not empty' => [
+            'expected' => false,
+            'loggedIn' => true,
+            'requestedGroupId' => $id,
+            'customerGroupIds' => [],
+            'operator' => Rule::OPERATOR_EMPTY,
+        ];
+
+        yield 'operator_empty / not logged in' => [
+            'expected' => true,
+            'loggedIn' => false,
+            'requestedGroupId' => null,
+            'customerGroupIds' => [],
+            'operator' => Rule::OPERATOR_EMPTY,
+        ];
     }
 }

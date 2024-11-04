@@ -1,6 +1,6 @@
 ---
 title: Add rule for requested customer group
-issue: NEXT-00000
+issue: NEXT-39301
 author: Robin Homberg
 author_email: robin.homberg@flagbit.de
 author_github: @robin-homberg
