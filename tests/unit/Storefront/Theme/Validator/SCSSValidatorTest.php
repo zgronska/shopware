@@ -53,7 +53,7 @@ class SCSSValidatorTest extends TestCase
             self::expectException(ThemeException::class);
         }
 
-        $returned = SCSSValidator::validate(new ScssPhpCompiler(), $data, ['^--.*', '^\$.*', 'var\(.*\)']);
+        $returned = SCSSValidator::validate(new ScssPhpCompiler(), $data, ['^\$.*']);
 
         static::assertSame($expected, $returned);
     }
@@ -434,10 +434,10 @@ class SCSSValidatorTest extends TestCase
             '',
             true,
         ];
-        yield 'color rgex allow list' => [
+        yield 'color custom value' => [
             [
                 'type' => 'color',
-                'value' => '--test',
+                'value' => 'foo(#fff)',
             ],
             '',
             true,
@@ -555,7 +555,7 @@ class SCSSValidatorTest extends TestCase
             '',
             true,
         ];
-        yield 'col incorrect' => [
+        yield 'color incorrect' => [
             [
                 'type' => 'color',
                 'value' => '#FFG',
@@ -575,21 +575,7 @@ class SCSSValidatorTest extends TestCase
             ],
             '#fff',
         ];
-        yield 'color regex -- allow list' => [
-            [
-                'type' => 'color',
-                'value' => '--test',
-            ],
-            '--test',
-        ];
-        yield 'color regex var allow list' => [
-            [
-                'type' => 'color',
-                'value' => 'var($test)',
-            ],
-            'var($test)',
-        ];
-        yield 'color regex $ allow list' => [
+        yield 'color regex SASS variable $ allow list' => [
             [
                 'type' => 'color',
                 'value' => '$test',
@@ -601,6 +587,30 @@ class SCSSValidatorTest extends TestCase
             [
                 'type' => 'color',
                 'value' => 'lilaschwarzgepunktet',
+            ],
+            '',
+            true,
+        ];
+        yield 'color regex --' => [
+            [
+                'type' => 'color',
+                'value' => '--test',
+            ],
+            '',
+            true,
+        ];
+        yield 'color regex var' => [
+            [
+                'type' => 'color',
+                'value' => 'var(--test-test)',
+            ],
+            '',
+            true,
+        ];
+        yield 'color regex custom' => [
+            [
+                'type' => 'color',
+                'value' => 'foo(#fff)',
             ],
             '',
             true,
