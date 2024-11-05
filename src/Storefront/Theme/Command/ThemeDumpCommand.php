@@ -125,6 +125,8 @@ class ThemeDumpCommand extends Command
             return self::FAILURE;
         }
 
+        $dump['themeId'] = $themeEntity->getId();
+        $dump['technicalName'] = $themeConfig->getTechnicalName();
         $dump['domainUrl'] = $domainUrl;
         $dump['basePath'] = $this->stripProjectDir($fs->location);
 

@@ -467,6 +467,7 @@ class ThemeCompiler implements ThemeCompilerInterface
         );
 
         $this->tempFilesystem->write('theme-variables.scss', $dump);
+        $this->tempFilesystem->write('theme-variables/' . $themeId . '.scss', $dump);
 
         return $dump;
     }
