@@ -1,6 +1,6 @@
 ---
 title: Fix WriteCommandQueue command order
-issue: NEXT-00000
+issue: NEXT-39219
 author: Benjamin Wittwer
 author_email: benjamin.wittwer@a-k-f.de
 author_github: akf-bw
