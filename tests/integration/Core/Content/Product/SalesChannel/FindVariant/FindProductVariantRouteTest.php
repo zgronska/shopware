@@ -26,10 +26,7 @@ class FindProductVariantRouteTest extends TestCase
 
     private EntityRepository $repository;
 
-    /**
-     * @var SalesChannelContext
-     */
-    private $context;
+    private SalesChannelContext $context;
 
     private FindProductVariantRoute $findProductVariantRoute;
 

@@ -40,37 +40,22 @@ class CartRestorerTest extends TestCase
 {
     use IntegrationTestBehaviour;
 
-    /**
-     * @var Connection
-     */
-    private $connection;
+    private Connection $connection;
 
     private CartRestorer $cartRestorer;
 
-    /**
-     * @var CartService
-     */
-    private $cartService;
+    private CartService $cartService;
 
     /**
      * @var array<string, Event>
      */
     private array $events;
 
-    /**
-     * @var \Closure
-     */
-    private $callbackFn;
+    private \Closure $callbackFn;
 
-    /**
-     * @var EventDispatcherInterface
-     */
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
-    /**
-     * @var SalesChannelContextPersister
-     */
-    private $contextPersister;
+    private SalesChannelContextPersister $contextPersister;
 
     private string $customerId;
 

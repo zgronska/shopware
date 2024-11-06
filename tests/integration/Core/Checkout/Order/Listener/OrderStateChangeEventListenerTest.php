@@ -289,10 +289,7 @@ class OrderStateChangeEventListenerTest extends TestCase
  */
 class RuleValidator extends CallableClass
 {
-    /**
-     * @var OrderStateMachineStateChangeEvent|null
-     */
-    public $event;
+    public ?OrderStateMachineStateChangeEvent $event;
 
     public function __invoke(): void
     {
