@@ -21,6 +21,7 @@ use Shopware\Core\System\SalesChannel\Context\SalesChannelContextPersister;
 use Shopware\Core\System\SalesChannel\Context\SalesChannelContextService;
 use Shopware\Core\System\SalesChannel\Context\SalesChannelContextServiceInterface;
 use Shopware\Core\System\SalesChannel\Context\SalesChannelContextServiceParameters;
+use Shopware\Core\System\SalesChannel\SalesChannelContext;
 use Shopware\Core\Test\Integration\Traits\CustomerTestTrait;
 use Shopware\Core\Test\Stub\Framework\IdsCollection;
 use Shopware\Core\Test\TestDefaults;
@@ -174,7 +175,7 @@ class SalesChannelRequestContextResolverTest extends TestCase
 
         $context = $request->attributes->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_CONTEXT_OBJECT);
 
-        static::assertNotNull($context);
+        static::assertInstanceOf(SalesChannelContext::class, $context);
         static::assertEquals($imitatingUserId, $context->getImitatingUserId());
     }
 
@@ -198,7 +199,7 @@ class SalesChannelRequestContextResolverTest extends TestCase
 
         $context = $request->attributes->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_CONTEXT_OBJECT);
 
-        static::assertNotNull($context);
+        static::assertInstanceOf(SalesChannelContext::class, $context);
         static::assertNull($context->getImitatingUserId());
     }
 
