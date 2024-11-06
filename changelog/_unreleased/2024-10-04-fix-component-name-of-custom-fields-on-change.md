@@ -1,6 +1,6 @@
 ---
 title: Fix component name of custom fields on change
-issue: NEXT-0000
+issue: NEXT-38733
 author: Max
 author_email: max@swk-web.com
 author_github: @aragon999
