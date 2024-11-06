@@ -107,6 +107,12 @@ class ViteFileAccessorDecoratorTest extends TestCase
                 '.vite/entrypoints.json',
                 false,
             ],
+            [
+                'invalid',
+                'no_file_path',
+                '',
+                false,
+            ],
         ];
     }
 
