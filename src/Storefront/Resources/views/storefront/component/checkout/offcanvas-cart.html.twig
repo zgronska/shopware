@@ -104,7 +104,7 @@
                                         {% endblock %}
 
                                         {% block component_offcanvas_cart_actions_promotion_label %}
-                                            <label class="visually-hidden" for="addPromotionOffcanvasCartInput">
+                                            <label class="mb-1" for="addPromotionOffcanvasCartInput">
                                                 {{ 'checkout.addPromotionLabel'|trans|sw_sanitize }}
                                             </label>
                                         {% endblock %}
@@ -116,7 +116,6 @@
                                                            name="code"
                                                            class="form-control"
                                                            id="addPromotionOffcanvasCartInput"
-                                                           placeholder="{{ 'checkout.addPromotionPlaceholder'|trans|striptags }}"
                                                            aria-label="{{ 'checkout.addPromotionLabel'|trans|striptags }}"
                                                            aria-describedby="addPromotionOffcanvasCart"
                                                            required="required">
