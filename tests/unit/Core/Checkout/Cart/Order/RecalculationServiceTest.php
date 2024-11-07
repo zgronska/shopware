@@ -430,7 +430,8 @@ class RecalculationServiceTest extends TestCase
             ->expects(static::once())
             ->method('upsert')
             ->willReturnCallback(function (array $data) {
-                static::assertEmpty($data['deliveries']);
+                static::assertNotNull($data[0]);
+                static::assertEmpty($data[0]['deliveries']);
 
                 return new EntityWrittenContainerEvent(Context::createDefaultContext(), new NestedEventCollection([
                     new EntityWrittenEvent('order', [new EntityWriteResult('created-id', [], 'order', EntityWriteResult::OPERATION_INSERT)], Context::createDefaultContext()),
