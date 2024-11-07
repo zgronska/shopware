@@ -1,6 +1,6 @@
 ---
 title: Fix custom field content in flow builder
-issue: NEXT-00000
+issue: NEXT-39200
 author: Cedric Engler
 author_email: cedric.engler@pickware.de
 ---
