@@ -169,7 +169,6 @@ class CategoryBreadcrumbBuilderTest extends TestCase
             static::fail('Category is null');
         }
         $result = $categoryBreadcrumbBuilder->getCategoryBreadcrumbUrls($category, $this->salesChannelContext->getContext(), $this->salesChannelContext->getSalesChannel());
-        /** @var \Shopware\Core\Content\Breadcrumb\Struct\Breadcrumb $firstBreadcrumb */
         $firstBreadcrumb = $result[0];
 
         static::assertArrayHasKey('0', $result);
@@ -206,7 +205,6 @@ class CategoryBreadcrumbBuilderTest extends TestCase
             static::fail('Category is null');
         }
         $result = $categoryBreadcrumbBuilder->getCategoryBreadcrumbUrls($category, $this->salesChannelContext->getContext(), $this->salesChannelContext->getSalesChannel());
-        /** @var \Shopware\Core\Content\Breadcrumb\Struct\Breadcrumb $firstBreadcrumb */
         $firstBreadcrumb = $result[0];
 
         static::assertArrayHasKey('0', $result);
@@ -243,7 +241,6 @@ class CategoryBreadcrumbBuilderTest extends TestCase
             static::fail('Category is null');
         }
         $result = $categoryBreadcrumbBuilder->getCategoryBreadcrumbUrls($category, $this->salesChannelContext->getContext(), $this->salesChannelContext->getSalesChannel());
-        /** @var \Shopware\Core\Content\Breadcrumb\Struct\Breadcrumb $firstBreadcrumb */
         $firstBreadcrumb = $result[0];
 
         static::assertArrayHasKey('0', $result);
@@ -277,7 +274,6 @@ class CategoryBreadcrumbBuilderTest extends TestCase
         );
 
         $result = $categoryBreadcrumbBuilder->getProductBreadcrumbUrls($product->getId(), '', $this->salesChannelContext);
-        /** @var \Shopware\Core\Content\Breadcrumb\Struct\Breadcrumb $firstBreadcrumb */
         $firstBreadcrumb = $result[0];
 
         static::assertArrayHasKey('0', $result);

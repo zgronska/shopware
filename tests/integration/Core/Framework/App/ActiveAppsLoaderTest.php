@@ -15,10 +15,7 @@ class ActiveAppsLoaderTest extends TestCase
     use AppSystemTestBehaviour;
     use IntegrationTestBehaviour;
 
-    /**
-     * @var ActiveAppsLoader
-     */
-    private $activeAppsLoader;
+    private ActiveAppsLoader $activeAppsLoader;
 
     protected function setUp(): void
     {

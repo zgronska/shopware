@@ -28,7 +28,7 @@ class ProductApiTest extends TestCase
     /**
      * @var EntityRepository<ProductCollection>
      */
-    private $repository;
+    private EntityRepository $repository;
 
     protected function setUp(): void
     {

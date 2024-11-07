@@ -33,10 +33,7 @@ class LoadWishlistRouteTest extends TestCase
 
     private string $customerId;
 
-    /**
-     * @var SystemConfigService
-     */
-    private $systemConfigService;
+    private SystemConfigService $systemConfigService;
 
     protected function setUp(): void
     {
