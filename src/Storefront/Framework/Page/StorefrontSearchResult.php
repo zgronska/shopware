@@ -20,11 +20,15 @@ class StorefrontSearchResult extends EntitySearchResult
 {
     /**
      * @var array<FieldSorting>
+     *
+     * @deprecated tag:v6.7.0 - Will be natively typed
      */
     protected $sortings = [];
 
     /**
      * @var string|null
+     *
+     * @deprecated tag:v6.7.0 - Will be natively typed
      */
     protected $sorting;
 

@@ -19,11 +19,15 @@ if (Feature::isActive('v6.7.0.0')) {
     {
         /**
          * @var string|null
+         *
+         * @deprecated tag:v6.7.0 - Will be natively typed
          */
         protected $parentId;
 
         /**
          * @var string
+         *
+         * @deprecated tag:v6.7.0 - Will be natively typed
          */
         protected $productId;
 
@@ -36,11 +40,15 @@ if (Feature::isActive('v6.7.0.0')) {
 
         /**
          * @var ProductReviewEntity|null
+         *
+         * @deprecated tag:v6.7.0 - Will be natively typed
          */
         protected $customerReview;
 
         /**
          * @var int
+         *
+         * @deprecated tag:v6.7.0 - Will be natively typed
          */
         protected $totalReviews;
 
@@ -113,16 +121,22 @@ if (Feature::isActive('v6.7.0.0')) {
     {
         /**
          * @var string|null
+         *
+         * @deprecated tag:v6.7.0 - Will be natively typed
          */
         protected $parentId;
 
         /**
          * @var string
+         *
+         * @deprecated tag:v6.7.0 - Will be natively typed
          */
         protected $productId;
 
         /**
          * @var StorefrontSearchResult<ProductReviewCollection>
+         *
+         * @deprecated tag:v6.7.0 - Will be natively typed
          */
         protected $reviews;
 
@@ -130,11 +144,15 @@ if (Feature::isActive('v6.7.0.0')) {
 
         /**
          * @var ProductReviewEntity|null
+         *
+         * @deprecated tag:v6.7.0 - Will be natively typed
          */
         protected $customerReview;
 
         /**
          * @var int
+         *
+         * @deprecated tag:v6.7.0 - Will be natively typed
          */
         protected $totalReviews;
 
