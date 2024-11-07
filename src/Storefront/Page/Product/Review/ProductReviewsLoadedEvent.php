@@ -24,11 +24,15 @@ if (Feature::isActive('v6.7.0.0')) {
 
         /**
          * @var SalesChannelContext
+         *
+         * @deprecated tag:v6.7.0 - Will be natively typed
          */
         protected $salesChannelContext;
 
         /**
          * @var Request
+         *
+         * @deprecated tag:v6.7.0 - Will be natively typed
          */
         protected $request;
 
@@ -73,7 +77,7 @@ if (Feature::isActive('v6.7.0.0')) {
     class ProductReviewsLoadedEvent extends NestedEvent implements ShopwareSalesChannelEvent
     {
         /**
-         * @deprecated tag:v6.7.0 - Type will change to EntitySearchResult<ProductReviewCollection>
+         * @deprecated tag:v6.7.0 - Type will change to EntitySearchResult<ProductReviewCollection> and natively typed
          *
          * @var StorefrontSearchResult<ProductReviewCollection>
          */
@@ -81,11 +85,15 @@ if (Feature::isActive('v6.7.0.0')) {
 
         /**
          * @var SalesChannelContext
+         *
+         * @deprecated tag:v6.7.0 - Will be natively typed
          */
         protected $salesChannelContext;
 
         /**
          * @var Request
+         *
+         * @deprecated tag:v6.7.0 - Will be natively typed
          */
         protected $request;
 
