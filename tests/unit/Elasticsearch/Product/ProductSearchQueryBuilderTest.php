@@ -449,7 +449,6 @@ class ProductSearchQueryBuilderTest extends TestCase
         }
 
         $tokenCount = \count(\explode(' ', (string) $query));
-        $boost *= $tokenCount;
 
         $queries = [
             self::match($field . '.search', $query, $boost, 'auto', $andSearch),
