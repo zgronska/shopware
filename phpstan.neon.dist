@@ -96,7 +96,6 @@ parameters:
                 - src/Core/Content/Product/SalesChannel/Listing/ProductListingResult.php
                 - src/Core/Content/Product/SalesChannel/Review/ProductReviewResult.php
                 - src/Storefront/Framework/Page/StorefrontSearchResult.php
-                - src/Storefront/Page/Product/Review/ReviewLoaderResult.php
         -
             message: '#.*extends @final class Shopware\\Core\\Framework\\DataAbstractionLayer\\EntityRepository.#'
             paths:
