@@ -116,7 +116,6 @@ jobs:
       APP_ENV: test
       APP_URL: http://localhost:8000
       APP_SECRET: def00000bb5acb32b54ff8ee130270586eec0e878f7337dc7a837acc31d3ff00f93a56b595448b4b29664847dd51991b3314ff65aeeeb761a133b0ec0e070433bff08e48
-      DATABASE_URL: mysql://root:root@127.0.0.1:3306/shopware
       DATABASE_HOST: "127.0.0.1"
     steps:
       - name: Setup Shopware
@@ -126,11 +125,11 @@ jobs:
           shopware-version: ${{ github.ref }}
           shopware-repository: ${{ github.repository }}
 
-      - name: Start Webserver
-        run: symfony server:start -d --no-tls --allow-all-ip
-
       - name: Prepare schema lint
+        env:
+          NPM_CONFIG_PREFIX: ${{ github.workspace }}/var/cache/npm
         run: |
+          echo "PATH=${{ env.NPM_CONFIG_PREFIX }}/bin:$PATH" >> $GITHUB_ENV
           curl localhost:8000/
           npm i -g @redocly/cli@latest @shopware/api-gen
           export STOREFRONT_ID=$(bin/console sales-channel:list --output json | jq -r '.[] | select(.name == "Storefront") | .id')
