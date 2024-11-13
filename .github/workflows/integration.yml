@@ -16,8 +16,9 @@ jobs:
             major: false
           - name: Install
             major: false
+        include:
           - name: Platform
-            major: true
+            major: ${{ contains(github.workflow_ref, 'nightly') }}
     continue-on-error: ${{ matrix.project.major }}
     env:
       SHOPWARE_HTTP_CACHE_ENABLED: 0
