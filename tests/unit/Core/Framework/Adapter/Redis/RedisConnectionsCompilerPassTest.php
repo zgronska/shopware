@@ -77,6 +77,8 @@ class RedisConnectionsCompilerPassTest extends TestCase
         $locatorDefinition = $this->containerBuilder->getDefinition((string) $locatorArgument);
         $className = $locatorDefinition->getClass();
         static::assertIsString($className);
-        static::assertArrayHasKey(ContainerInterface::class, class_implements($className));
+        $interfaces = class_implements($className);
+        static::assertIsArray($interfaces);
+        static::assertArrayHasKey(ContainerInterface::class, $interfaces);
     }
 }
