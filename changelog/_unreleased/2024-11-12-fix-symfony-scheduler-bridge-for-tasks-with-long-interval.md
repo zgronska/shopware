@@ -1,6 +1,6 @@
 ---
 title: Fix symfony scheduler bridge for tasks with long interval
-issue: NEXT-00000
+issue: NEXT-39542
 author: Felix Schneider
 author_github: @schneider-felix
 ---
