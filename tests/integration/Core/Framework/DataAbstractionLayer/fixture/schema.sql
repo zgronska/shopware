@@ -19,7 +19,7 @@ CREATE TABLE `attribute_entity` (
     `date_interval` VARCHAR(255) NULL,
     `time_zone` VARCHAR(255) NULL,
     `serialized` JSON NULL,
-    `price` LONGTEXT NULL,
+    `price` JSON NULL,
     `currency_id` BINARY(16) NULL,
     `state_id` BINARY(16) NULL,
     `follow_id` BINARY(16) NULL,
