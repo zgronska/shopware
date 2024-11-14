@@ -51,10 +51,12 @@ class MediaPathPostUpdaterTest extends TestCase
 
         static::assertNotNull($message);
         // There are some medias, like dummy theme images etc. that are created by the system and can not be cleaned up because of FKs
-        static::assertNotEmpty($message->getData());
-        static::assertContains($ids->get('media-1'), $message->getData());
-        static::assertContains($ids->get('media-2'), $message->getData());
-        static::assertContains($ids->get('media-3'), $message->getData());
+        $data = $message->getData();
+        static::assertIsArray($data);
+        static::assertNotEmpty($data);
+        static::assertContains($ids->get('media-1'), $data);
+        static::assertContains($ids->get('media-2'), $data);
+        static::assertContains($ids->get('media-3'), $data);
         static::assertGreaterThanOrEqual(3, $message->getOffset());
     }
 

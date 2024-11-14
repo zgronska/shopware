@@ -20,16 +20,22 @@ use Symfony\Component\HttpFoundation\Request;
 class ProductReviewsLoadedEvent extends NestedEvent implements ShopwareSalesChannelEvent
 {
     /**
+     * @deprecated tag:v6.7.0
+     *
      * @var StorefrontSearchResult<ProductReviewCollection>
      */
     protected $searchResult;
 
     /**
+     * @deprecated tag:v6.7.0
+     *
      * @var SalesChannelContext
      */
     protected $salesChannelContext;
 
     /**
+     * @deprecated tag:v6.7.0
+     *
      * @var Request
      */
     protected $request;
