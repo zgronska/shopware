@@ -1,9 +1,9 @@
 ---
-title: Update `MessageQueueSizeRestrictListener` to skip on `enforceLimit = false`
-issue: NEXT-00000
+title: Change behaviour of MessageQueueSizeRestrictListener
+issue: NEXT-39611
 author: Benjamin Wittwer
 author_email: benjamin.wittwer@a-k-f.de
 author_github: akf-bw
 ---
 # Core
-* Changed the `MessageQueueSizeRestrictListener` to directly skip all checks, if `enforceLimit` is set to `false` to skip calculation time for large messages
+* Changed behaviour of `\Shopware\Core\Framework\MessageQueue\Subscriber\MessageQueueSizeRestrictListener` to directly skip all checks, if config value `shopware.messenger.enforce_message_size` is set to `false` to prevent calculation time for large messages

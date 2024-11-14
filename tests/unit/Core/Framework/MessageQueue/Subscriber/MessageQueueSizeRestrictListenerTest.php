@@ -4,7 +4,6 @@ namespace Shopware\Tests\Unit\Core\Framework\MessageQueue\Subscriber;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\LoggerInterface;
 use Shopware\Core\Framework\MessageQueue\MessageQueueException;
 use Shopware\Core\Framework\MessageQueue\Service\MessageSizeCalculator;
 use Shopware\Core\Framework\MessageQueue\Subscriber\MessageQueueSizeRestrictListener;
@@ -78,12 +77,13 @@ class MessageQueueSizeRestrictListenerTest extends TestCase
 
         $event = new SendMessageToTransportsEvent($envelope, []);
 
-        $this->expectExceptionObject(MessageQueueException::queueMessageSizeExceeded(\stdClass::class));
+        $this->expectException(MessageQueueException::class);
+        $this->expectExceptionMessage('The message "stdClass" exceeds the 256 kB size limit with its size of 256.0859375 kB.');
 
         $listener($event);
     }
 
-    public function testSmallMessageAsyncTransportNoExceptionWithDisabledEnforceLimit(): void
+    public function testSmallMessageAsyncTransportNoExceptionWithDisabledEnforceMessageSize(): void
     {
         $this->expectNotToPerformAssertions();
 
@@ -98,7 +98,7 @@ class MessageQueueSizeRestrictListenerTest extends TestCase
         $listener($event);
     }
 
-    public function testBigMessageAsyncTransportNoExceptionWithDisabledEnforceLimit(): void
+    public function testBigMessageAsyncTransportNoExceptionWithDisabledEnforceMessageSize(): void
     {
         $this->expectNotToPerformAssertions();
 
