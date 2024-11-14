@@ -143,6 +143,10 @@ build image:
   dependencies: [Build]
   variables:
     GIT_STRATEGY: none
+    KUBERNETES_CPU_REQUEST: "1000m"
+    KUBERNETES_CPU_LIMIT: "2000m"
+    KUBERNETES_MEMORY_REQUEST: "1Gi"
+    KUBERNETES_MEMORY_LIMIT: "4Gi"
   rules:
     - if: '$CI_COMMIT_BRANCH && $CI_COMMIT_REF_PROTECTED == "true" && $CI_COMMIT_BRANCH !~ /^saas\/.*/'
       variables:
@@ -169,6 +173,10 @@ build image tagged:
   dependencies: [Build, tested_update_tags]
   variables:
     GIT_STRATEGY: fetch
+    KUBERNETES_CPU_REQUEST: "1000m"
+    KUBERNETES_CPU_LIMIT: "2000m"
+    KUBERNETES_MEMORY_REQUEST: "1Gi"
+    KUBERNETES_MEMORY_LIMIT: "4Gi"
   parallel:
     matrix:
       - SHOPWARE_CORE_VERSION: [

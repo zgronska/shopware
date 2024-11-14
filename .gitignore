@@ -12,6 +12,7 @@ Thumbs.db
 
 # PhpStorm-Project
 /.idea/
+!/.idea/icon.svg
 /.fleet/
 *.http
 /.run/
