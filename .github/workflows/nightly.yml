@@ -39,7 +39,7 @@ jobs:
           image-tags: "!latest, !trunk, !6.5.x, !v*"
           skip-shas: ${{ steps.skip-sha.outputs.skip-sha }}
           keep-n-most-recent: 1
-          dry-run: ${{ env.ACT }}
+          dry-run: ${{ env.ACT && true || false }}
 
   redis:
     name: Redis
