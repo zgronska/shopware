@@ -204,7 +204,7 @@ BC check MR:
      when: never
    - !reference [.rules, skip]
    - !reference [.rules, run]
-   - if: '$CI_MERGE_REQUEST_LABELS =~ /.*removes_deprecations.*/'
+   - if: '$CI_MERGE_REQUEST_LABELS =~ /.*removes_deprecations.*/ || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /.*\/feature\/.*/'
      allow_failure: true
      changes:
          - composer.json
