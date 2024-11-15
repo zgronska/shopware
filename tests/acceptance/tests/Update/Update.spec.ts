@@ -16,7 +16,7 @@ test(`Update an existing Shopware ${process.env.SHOPWARE_UPDATE_FROM} instance.`
 
     await ((await AdminApiContext.get(`./_info/config`)).json()) as { version: string };
 
-    await page.getByRole('button', { name: 'Open update' }).click();
+    await page.goto('#/sw/settings/shopware/updates/wizard');
 
     await page.getByRole('button', { name: 'Start update' }).click();
 
