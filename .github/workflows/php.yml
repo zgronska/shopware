@@ -107,7 +107,7 @@ jobs:
         if: github.event_name != 'pull_request'
         run: composer run bc-check
       - name: BC Checker PR
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && !contains(github.base_ref, '/feature/')
         run: composer run bc-check -- --from="origin/${{ github.base_ref }}"
 
   openapi-lint:
